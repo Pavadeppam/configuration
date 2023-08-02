@@ -2,4 +2,13 @@
    https://stackoverflow.com/questions/62032050/how-to-remove-query-param-with-react-hooks
    https://stackoverflow.com/questions/68237930/react-router-dom-clear-url-parameters-without-refreshing-the-page
 
-2) 
+2) Tuning - Abstract external libray with abstract component
+   https://stackoverflow.com/questions/57117878/create-react-app-reduce-build-size-main-hash-chunk-js-is-3mb-with-mostly-ima
+   https://www.youtube.com/watch?v=j8NJc60H294
+
+ 3) Optimising Bundles Size
+    https://itnext.io/tips-tricks-for-smaller-bundles-in-react-apps-58d1b20c9c0
+    https://stackoverflow.com/questions/57117878/create-react-app-reduce-build-size-main-hash-chunk-js-is-3mb-with-mostly-ima
+    
+ 4) security - How to use React without unsafe-inline and why - CSR
+    https://drag13.io/posts/react-inline-runtimer-chunk/index.html
