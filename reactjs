@@ -16,3 +16,8 @@
  5) andorid mobile chrome browser debugging
     https://developer.chrome.com/docs/devtools/remote-debugging/
     https://medium.com/front-end-weekly/how-to-inspect-websites-on-mobile-devices-with-chrome-devtools-534086bb76a8
+
+ 6) How to execute code before window.load and after DOM has been loaded?
+  https://stackoverflow.com/questions/13270290/how-to-execute-code-before-window-load-and-after-dom-has-been-loaded
+  https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
+  
