@@ -20,4 +20,6 @@
  6) How to execute code before window.load and after DOM has been loaded?
   https://stackoverflow.com/questions/13270290/how-to-execute-code-before-window-load-and-after-dom-has-been-loaded
   https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
+  https://codeburst.io/javascript-events-handlers-onreadystatechange-and-onselectionchange-52edd681fd2e
+  https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState
   
