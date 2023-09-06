@@ -22,4 +22,22 @@
   https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
   https://codeburst.io/javascript-events-handlers-onreadystatechange-and-onselectionchange-52edd681fd2e
   https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState
+  https://stackoverflow.com/questions/2414750/difference-between-domcontentloaded-and-load-events
+  
+
+  7) Best ways to load 3rd part scripts
+   https://web.dev/efficiently-load-third-party-javascript/
+   https://stackoverflow.com/questions/13270290/how-to-execute-code-before-window-load-and-after-dom-has-been-loaded
+   https://experienceleaguecommunities.adobe.com/t5/adobe-experience-platform-data/page-load-speed-issue/td-p/362661
+   https://experienceleaguecommunities.adobe.com/t5/adobe-analytics-questions/render-blocking-issue-for-adobe-scripts/m-p/291416
+   Imps (Adobe script placement guidelines)
+   https://experienceleaguecommunities.adobe.com/t5/adobe-analytics-questions/render-blocking-issue-for-adobe-scripts/m-p/291416
+   https://experienceleaguecommunities.adobe.com/t5/dynamic-tag-management-questions/page-load-rule-onload-dom-ready-no-data-sent/m-p/230338#M2527
+   https://stackoverflow.com/questions/12637725/what-is-the-dom-ready-event
+   
+   8) Hosting Reactjs 
+    nginx vs serve
+    https://stackoverflow.com/questions/61178165/should-i-be-using-nginx-to-serve-react-in-production
+   
+   
   
