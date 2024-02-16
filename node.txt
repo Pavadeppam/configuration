@@ -1,4 +1,5 @@
 1) Uninstall node on mac
+https://knowmax3.ultimatix.net/sites/adminhomepage/testsite/visastampinginfo/default.aspx
 https://stackoverflow.com/questions/9044788/how-do-i-uninstall-nodejs-installed-from-pkg-mac-os-x
 
 sudo npm uninstall npm -g
