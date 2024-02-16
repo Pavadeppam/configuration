@@ -10,3 +10,16 @@ sudo rm /usr/local/share/man/man1/node.1
 sudo rm /usr/local/lib/dtrace/node.d
 brew install node
 
+Everyone pls see message from procurement team for MAC,can you please check & update whom its pending next.
+ 
+PRs are processed from my end, now pending with project MAC to check SPOC
+ 
+You may track  and validate the PR details following the below mentioned steps.  
+Check the status of the order on the right hand side top of the PR.  
+If status shows ordered, go to summary tab, and reference the PO # to ascertain the status with notify.rag@tcs.com
+Ultimatix->Applications->Finance & Infrastructure->Procurement Functions -> Procurement Approvals
+1.Please login to Procurement Approvals application for MAC approval
+2.You will land to Your Worklist
+3.All the pending PRs are available under New Request Section.
+ 
+Please note: Batch run occurs within every 2 hrs.
