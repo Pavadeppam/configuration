@@ -23,3 +23,50 @@ Ultimatix->Applications->Finance & Infrastructure->Procurement Functions -> Proc
 3.All the pending PRs are available under New Request Section.
  
 Please note: Batch run occurs within every 2 hrs.
+
+#################################################################################
+*[_type == "your_document_type"] {
+  _id,
+  maxLevel: countObjectsAtDepth(_id, "*[_type == 'your_document_type']"),
+}[maxLevel > 0] | order(maxLevel desc)[0]
+
+
+In this GROQ query:
+
+Replace "your_document_type" with the actual type of your documents that contain nested objects.
+_id is used to identify each document uniquely.
+countObjectsAtDepth(_id, "*[_type == 'your_document_type']") calculates the maximum level of nesting for each document by counting the number of nested objects at different depths.
+[maxLevel > 0] filters out documents that don't have any nested objects.
+order(maxLevel desc) sorts the documents based on the maximum level of nesting in descending order.
+[0] selects the document with the highest level of nesting (the first document after sorting).
+This query will return the document with the highest level of nesting of objects in your specified schema. Adjust the query according to your actual schema structure and data model.
+
+#########################################################################
+In Sanity.io schemas, the proper level of nesting for objects depends on several factors, including performance considerations. Here are some guidelines to help determine the appropriate level of nesting for objects in your Sanity.io schema:
+
+Avoid Over-Nesting: Deeply nested objects can lead to complex queries and slower performance, especially when retrieving data. Aim to keep your schema reasonably flat and avoid excessive nesting if possible.
+
+Consider Query Complexity: Think about how your data will be queried and accessed. Shallowly nested structures are generally easier to work with and can lead to more efficient queries.
+
+Use References: Instead of deeply nesting related data within a single document, consider using references to connect related documents. This approach can improve performance by reducing the size of individual documents and simplifying queries.
+
+Denormalize Carefully: While denormalization can improve read performance by reducing the need for joins, be cautious about over-denormalizing. Balance denormalization with the potential for data redundancy and increased storage requirements.
+
+Optimize Query Patterns: Analyze your application's query patterns and optimize your schema structure accordingly. Use GROQ queries efficiently to fetch only the necessary data and avoid over-fetching.
+
+Consider Use Cases: Consider the specific use cases of your application. For example, if you frequently need to access deeply nested data, ensure that your schema supports efficient querying for those scenarios.
+
+Performance Testing: Test the performance of your schema with realistic data and query patterns. Use Sanity.io's tools for performance monitoring and optimization.
+
+By carefully considering these factors and optimizing your schema structure, you can achieve better performance and scalability in your Sanity.io projects.
+
+
+
+
+
+#################################################
+*[_type == "your_document_type" && depth(_id) > 2]
+
+##########################################
+*[_id in dataset('your_dataset_name') && _type == "your_document_type" && depth(_id) > 2]
+
