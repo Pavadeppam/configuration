@@ -12,6 +12,10 @@
     *[_type == "hotel" && _id in ^.participatingHotelId && _id in ^.DestinationInsideHotelId]._id
   ]
 }
+--****************
+
+2
+
 *[
   _type == "offerPackages" &&
   brandName == "Ama" &&
@@ -24,5 +28,3 @@
   )
 }
 
-
-2
