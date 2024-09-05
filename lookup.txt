@@ -12,3 +12,17 @@
     *[_type == "hotel" && _id in ^.participatingHotelId && _id in ^.DestinationInsideHotelId]._id
   ]
 }
+*[
+  _type == "offerPackages" &&
+  brandName == "Ama" &&
+  identifier == $offerIdentifier &&
+  count(participatingDestinations[@->name == $destination]) > 0
+] {
+  "commonHotels": array::compact(
+    // Return only the hotel IDs that are in both participatingHotelId and DestinationInsideHotelId
+    hotels[].participatingHotels[]._ref[ @ in ^.participatingDestinations[]->participatingHotels[]._ref ]
+  )
+}
+
+
+2
