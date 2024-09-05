@@ -28,3 +28,23 @@
   )
 }
 
+--*********************************************************************************
+
+*[
+  _type == "offerPackages" &&
+  brandName == "Ama" &&
+  identifier == $offerIdentifier &&
+  count(participatingDestinations[@->name == $destination]) > 0
+] {
+  "participatingHotelId": hotels[].participatingHotels[]._ref,
+  "DestinationInsideHotelId": participatingDestinations[]->participatingHotels[]._ref
+} {
+  "commonHotels": [
+    // Using array operations to find common hotel names
+    *[_type == "hotel" && _id in ^.participatingHotelId && _id in ^.DestinationInsideHotelId]{
+      _id,
+      name
+    }
+  ]
+}
+
