@@ -1,37 +1,14 @@
-*[_type == "offerPackages" && brandName== "Ama" && identifier == $offerIdentifier && count(participatingDestinations[@ -> name ==$destination ])>0]{
-"participatingHotelId":hotels[].participatingHotels[]._ref,
-"DestinationInsideHotelId": participatingDestinations[]-> participatingHotels[]._ref,
-   
+*[
+  _type == "offerPackages" &&
+  brandName == "Ama" &&
+  identifier == $offerIdentifier &&
+  count(participatingDestinations[@->name == $destination]) > 0
+] {
+  "participatingHotelId": hotels[].participatingHotels[]._ref,
+  "DestinationInsideHotelId": participatingDestinations[]->participatingHotels[]._ref
+} {
+  "commonHotels": [
+    // Using array operations to find common hotel IDs
+    *[_type == "hotel" && _id in ^.participatingHotelId && _id in ^.DestinationInsideHotelId]._id
+  ]
 }
-
-{offerIdentifier : "breakfast-inclusive-rate",
-  destination: "Goa"
-}
-
-[
-  {
-    "participatingHotelId": [
-      "jBJgpqpGruZvOgVMUHW0R1",
-      "ZpixvKy5oWJdKYmQwc7klC",
-      "jBJgpqpGruZvOgVMUHWCtV"
-    ],
-    "DestinationInsideHotelId": [
-      "jBJgpqpGruZvOgVMUHW159",
-      "jBJgpqpGruZvOgVMUHVu7l",
-      "jBJgpqpGruZvOgVMUHVtnh",
-      "Dk4vsGyYpr9Xi9g7r0AIUj",
-      "jBJgpqpGruZvOgVMUHVuMo",
-      "Dk4vsGyYpr9Xi9g7r0AFvF",
-      "ZpixvKy5oWJdKYmQwc7kpt",
-      "ZpixvKy5oWJdKYmQwc8CEx",
-      "ZpixvKy5oWJdKYmQwc8Bmn",
-      "jBJgpqpGruZvOgVMUHWDXd",
-      "290b8c8e-d499-4ff4-8460-7bc99cc8336e",
-      "ZpixvKy5oWJdKYmQwc8BPK",
-      "jBJgpqpGruZvOgVMUHWEGm",
-      "ZpixvKy5oWJdKYmQwc7klC",
-      "jBJgpqpGruZvOgVMUHWELn",
-      "jBJgpqpGruZvOgVMUHWCtV"
-    ]
-  }
-]
