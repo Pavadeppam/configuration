@@ -103,3 +103,11 @@ const nextConfig = {
 }
 
 module.exports = nextConfig;
+
+{
+  "extends": ["next/core-web-vitals"],
+  "rules": {
+    "no-optional-chain-new": "error" // replace with the appropriate path if necessary
+  }
+}
+
