@@ -1,50 +1,74 @@
-*[
-  _type == "offerPackages" &&
-  brandName == "Ama" &&
-  identifier == $offerIdentifier &&
-  count(participatingDestinations[@->name == $destination]) > 0
-] {
-  "participatingHotelId": hotels[].participatingHotels[]._ref,
-  "DestinationInsideHotelId": participatingDestinations[]->participatingHotels[]._ref
-} {
-  "commonHotels": [
-    // Using array operations to find common hotel IDs
-    *[_type == "hotel" && _id in ^.participatingHotelId && _id in ^.DestinationInsideHotelId]._id
-  ]
+const nextConfig = {
+  reactStrictMode: false,
+  swcMinify: true,
+  basePath: "/en-in",
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/en-in",
+        basePath: false,
+        permanent: false
+      },
+      {
+        source: "/homepage",
+        destination: "/",
+        permanent: true
+      }
+    ]
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/robots.txt",
+        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/robots.txt`,
+        basePath: false
+      },
+      {
+        source: "/sitemap.xml",
+        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/sitemap.xml`,
+        basePath: false
+      },
+      {
+        source: "/destinations.xml",
+        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/destinations.xml`,
+        basePath: false
+      },
+      {
+        source: "/about-ama.xml",
+        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/about-ama.xml`,
+        basePath: false
+      },
+      {
+        source: "/offers.xml",
+        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/offers.xml`,
+        basePath: false
+      },
+      {
+        source: "/themes.xml",
+        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/themes.xml`,
+        basePath: false
+      },
+      {
+        source: "/experiences.xml",
+        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/experiences.xml`,
+        basePath: false
+      },
+      {
+        source: "/villas-and-bungalows.xml",
+        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/villas-and-bungalows.xml`,
+        basePath: false
+      },
+      {
+        source: "/blogs.xml",
+        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/blogs.xml`,
+        basePath: false
+      }
+    ]
+  },
+  experimental: {
+    serverActions: true
+  }
 }
---****************
 
-2
-
-*[
-  _type == "offerPackages" &&
-  brandName == "Ama" &&
-  identifier == $offerIdentifier &&
-  count(participatingDestinations[@->name == $destination]) > 0
-] {
-  "commonHotels": array::compact(
-    // Return only the hotel IDs that are in both participatingHotelId and DestinationInsideHotelId
-    hotels[].participatingHotels[]._ref[ @ in ^.participatingDestinations[]->participatingHotels[]._ref ]
-  )
-}
-
---*********************************************************************************
-
-*[
-  _type == "offerPackages" &&
-  brandName == "Ama" &&
-  identifier == $offerIdentifier &&
-  count(participatingDestinations[@->name == $destination]) > 0
-] {
-  "participatingHotelId": hotels[].participatingHotels[]._ref,
-  "DestinationInsideHotelId": participatingDestinations[]->participatingHotels[]._ref
-} {
-  "commonHotels": [
-    // Using array operations to find common hotel names
-    *[_type == "hotel" && _id in ^.participatingHotelId && _id in ^.DestinationInsideHotelId]{
-      _id,
-      name
-    }
-  ]
-}
-
+module.exports = nextConfig
