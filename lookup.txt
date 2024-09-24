@@ -1,3 +1,5 @@
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
 const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
@@ -68,8 +70,36 @@ const nextConfig = {
   },
   experimental: {
     serverActions: true
+  },
+  webpack(config, { isServer }) {
+    // Add Bundle Analyzer
+    if (process.env.ANALYZE) {
+      config.plugins.push(
+        new BundleAnalyzerPlugin({
+          analyzerMode: 'server',
+          analyzerPort: isServer ? 8888 : 8889,
+          openAnalyzer: true,
+        })
+      );
+    }
+
+    // Enable tree-shaking and optimize the build process
+    config.optimization = {
+      ...config.optimization,
+      usedExports: true,  // Ensure Webpack marks unused exports for removal
+      minimize: true,     // Minimize the bundle to remove dead code
+      splitChunks: {
+        chunks: 'all',    // Split all chunks for better optimization
+      },
+    };
+
+    // Ensure production mode for frontend builds
+    if (!isServer) {
+      config.mode = 'production';
+    }
+
+    return config;
   }
 }
 
-module.exports = nextConfig
-
+module.exports = nextConfig;
