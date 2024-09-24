@@ -1,3 +1,13 @@
+{
+  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
+  "rules": {
+    "no-unused-vars": "warn",
+    "@typescript-eslint/no-unnecessary-type-assertion": "error",
+    "no-optional-chain-new": "error" // This won't work without importing
+  }
+}
+
+
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const nextConfig = {
