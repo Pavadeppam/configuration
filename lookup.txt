@@ -1,123 +1,35 @@
-{
-  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
-  "rules": {
-    "no-unused-vars": "warn",
-    "@typescript-eslint/no-unnecessary-type-assertion": "error",
-    "no-optional-chain-new": "error" // This won't work without importing
-  }
-}
+Thanks for todays short discussion. As discussed herein please find the list of queries. Please do review & share the slot to discuss further on this
+
+This is re pages, images and video caching set up for the website during the deployment.
+
+1) Pages
+  According to our understanding the static pages like landing pages , blogs etc needs to be cached.  More likely SSG-Static Site Generated pages.
+   In Taj/Gateway scenario what type of pages are cached? 
+   What rules are set up like TTL(Time-to-Live), cache-control etc?
+   Is this done incrementally like , went live and after understanding the performance , the pages are cached?
+   What's the responsibility of development team in this regard?
+
+2) Static Assets (CSS, JS, Images):
+  According to our understanding , if any assets generated(CSS, JS, Images & fonts) by NextJS build which are available at /_next/static/<path>
+  can be cached at Akmai edge server.
+  What type of static assets cached for Ta/Gateway? 
+  What rules are set up? like Cache-Control: public, max-age=<age no>, immutable
+  What's the responsibility of development team in this regard?
+
+3) Assets(Mainly Video files) store in Azure Blob storage
+   According to our understanding , the videos which are stored in Azure Blob Storage, can be cached at  Akmai edge server.
+   What rules to be applied for caching video files? like cache-control max-age:<retension-time)
+   Is there are any rules set up for downloading the big file downloading in chunks i.e. partial downloading? like content-range bytes <value>
+   Also in Taj homepage banner to download video file a query paramters is passed impolicy=Medium_high , why this used? Is this for caching so we can reuse?
+
+4) Caching assets stored in Sanity CDN(Mainly images) 
+    According to our understanding , the images stored in Sanity CDN being cached utilizing sanity caching mechanism.
+    That means already Sanity hosted images are served from Sanity CDN cache , so akmai caching is not requied in this scenario.
+    Is my unserstanding correct? 
+     OR
+    Sanity stored images to be cahed again in Akmai edge caching?
+
+5) Any of the GROQ query responses cached at Akmai edge layer OR Sanity itself takes care based on mechanism set up at Sanity system?
 
 
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-
-const nextConfig = {
-  reactStrictMode: false,
-  swcMinify: true,
-  basePath: "/en-in",
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/en-in",
-        basePath: false,
-        permanent: false
-      },
-      {
-        source: "/homepage",
-        destination: "/",
-        permanent: true
-      }
-    ]
-  },
-  async rewrites() {
-    return [
-      {
-        source: "/robots.txt",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/robots.txt`,
-        basePath: false
-      },
-      {
-        source: "/sitemap.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/sitemap.xml`,
-        basePath: false
-      },
-      {
-        source: "/destinations.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/destinations.xml`,
-        basePath: false
-      },
-      {
-        source: "/about-ama.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/about-ama.xml`,
-        basePath: false
-      },
-      {
-        source: "/offers.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/offers.xml`,
-        basePath: false
-      },
-      {
-        source: "/themes.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/themes.xml`,
-        basePath: false
-      },
-      {
-        source: "/experiences.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/experiences.xml`,
-        basePath: false
-      },
-      {
-        source: "/villas-and-bungalows.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/villas-and-bungalows.xml`,
-        basePath: false
-      },
-      {
-        source: "/blogs.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/blogs.xml`,
-        basePath: false
-      }
-    ]
-  },
-  experimental: {
-    serverActions: true
-  },
-  webpack(config, { isServer }) {
-    // Add Bundle Analyzer
-    if (process.env.ANALYZE) {
-      config.plugins.push(
-        new BundleAnalyzerPlugin({
-          analyzerMode: 'server',
-          analyzerPort: isServer ? 8888 : 8889,
-          openAnalyzer: true,
-        })
-      );
-    }
-
-    // Enable tree-shaking and optimize the build process
-    config.optimization = {
-      ...config.optimization,
-      usedExports: true,  // Ensure Webpack marks unused exports for removal
-      minimize: true,     // Minimize the bundle to remove dead code
-      splitChunks: {
-        chunks: 'all',    // Split all chunks for better optimization
-      },
-    };
-
-    // Ensure production mode for frontend builds
-    if (!isServer) {
-      config.mode = 'production';
-    }
-
-    return config;
-  }
-}
-
-module.exports = nextConfig;
-
-{
-  "extends": ["next/core-web-vitals"],
-  "rules": {
-    "no-optional-chain-new": "error" // replace with the appropriate path if necessary
-  }
-}
-
+ALso please share is there any IHCL reference guide standards for caching statergy followed in IHCL ecosystem
