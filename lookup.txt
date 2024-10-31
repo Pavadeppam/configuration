@@ -1,313 +1,109 @@
-const ContentSecurityPolicy = ` 
-default-src 'self' *.googletagmanager.com app.link;
-script-src  'self' *.googletagmanager.com www.google.com public.releases.juspay.in *.cloud.yellow.ai www.gstatic.com sit-r2-account.tatadigital.com accounts.tatadigital.com maps.googleapis.com assets.juspay.in code.jquery.com test.ccavenue.com 'unsafe-eval';
-style-src  'self' app.link;
-object-src 'self' *.sanity.io app.link;
-base-uri 'self';
-connect-src 'self' *.sanity.io analytics.google.com *.googletagmanager.com ocl5w36p.api.sanity.io cdn.sanity.io www.google.com *.blob.core.windows.net *.api-devv2.tajhotels.com api-devv2.tajhotels.com *.api-qa1v2.tajhotels.com api-qa1v2.tajhotels.com *.api-uatv2.tajhotels.com api-uatv2.tajhotels.com assets.juspay.in ;
-font-src 'self';
-media-src 'self' cdn.sanity.io assets-preprod1-528v2.tajhotels.com s3.amazonaws.com cdn.jsdelivr.net;
-img-src 'self' *.sanity.io cdn.sanity.io www.google.com www.googletagmanager.com assets-preprod1-528v2.tajhotels.com s3.amazonaws.com cdn.jsdelivr.net;
-manifest-src 'self' app.link;`
-const nextConfig = {
-  reactStrictMode: false,
-  swcMinify: true,
-  basePath: "/en-in",
-  async headers() {
-    return [
-      {
-        source: "/(.*)",
-        headers: [
-          // {
-          //   key: "X-Frame-Options",
-          //   value: "SAMEORIGIN",
-          // },
-          // {
-          //   key: "Content-Security-Policy",
-          //   value: ContentSecurityPolicy.replace(/\n/g, ""),
-          // },
-          {
-            key: "Content-Security-Policy",
-            value:
-              "frame-ancestors 'self' https://uatmytaj.tajhotels.com  https://mytaj.tajhotels.com https://mytajsats.honohr.com",
-          },
-          {
-            key: "X-Content-Type-Options",
-            value: "nosniff",
-          },
-          {
-            key: "X-XSS-Protection",
-            value: "1; mode=block",
-          },
-        ],
-      },
-    ]
-  },
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/en-in",
-        basePath: false,
-        permanent: true,
-      },
-    ]
-  },
-  async rewrites() {
-    return [
-      {
-        source: "/robots.txt",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/robots.txt`,
-        basePath: false,
-      },
-      {
-        source: "/favicon.ico",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/favicon.ico`,
-        basePath: false,
-      },
-      {
-        source: "/sitemap.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/sitemap.xml`,
-        basePath: false,
-      },
-      {
-        source: "/destination.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/destination.xml`,
-        basePath: false,
-      },
-      {
-        source: "/about-taj.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/about-taj.xml`,
-        basePath: false,
-      },
-      {
-        source: "/gifting-shopping.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/gifting-shopping.xml`,
-        basePath: false,
-      },
-      {
-        source: "/j-wellness-circle.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/j-wellness-circle.xml`,
-        basePath: false,
-      },
-      {
-        source: "/offers.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/offers.xml`,
-        basePath: false,
-      },
-      {
-        source: "/restaurants.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/restaurants.xml`,
-        basePath: false,
-      },
-      {
-        source: "/taj-holidays.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/taj-holidays.xml`,
-        basePath: false,
-      },
-      {
-        source: "/taj-membership.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/taj-membership.xml`,
-        basePath: false,
-      },
-      {
-        source: "/taj-properties.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/taj-properties.xml`,
-        basePath: false,
-      },
-      {
-        source: "/travel-inspiration.xml",
-        destination: `${process.env.NEXT_PUBLIC_DOMAIN_URL}en-in/travel-inspiration.xml`,
-        basePath: false,
-      },
-    ]
-  },
-  experimental: {
-    serverActions: true,
-  },
-  compiler: {
-    removeConsole:
-      process.env.NEXT_PUBLIC_ENVIRONMENT === "dev" || process.env.NEXT_PUBLIC_ENVIRONMENT === "sit" ? false : true,
-  },
-}
-
-module.exports = nextConfig
-
---*****************************************************************************************************************************************
-
-let nextConfig = {};
-const ContentSecurityPolicy = `
-  default-src 'self' *.tatadigital.com *.tataneupolicy.com *.tataneucredit.com *.googletagmanager.com *.adobedtm.com *.adobecqms.net app.link *.juspay.in;
-  script-src * 'unsafe-inline' 'self' *.tatadigital.com *.tataneupolicy.com *.tataneucredit.com *.go-mpulse.net siteintercept.qualtrics.com *.qualtrics.com app.link api2.branch.io *.branch.io *.facebook.net *.licdn.com rs.fullstory.com *.fullstory.com  *.googletagmanager.com *.adobecqms.net *.adobedtm.com fpnpmcdn.net  *.juspay.in 'unsafe-eval';
-  style-src 'unsafe-inline' 'self' *.tatadigital.com *.tataneupolicy.com *.tataneucredit.com app.link  *.juspay.in;
-  object-src 'self' *.tatadigital.com *.tataneupolicy.com *.tataneucredit.com *.sanity.io app.link;
-  base-uri 'self' *.tatadigital.com *.tataneupolicy.com *.tataneucredit.com app.link;
-  connect-src 'self' *.facebook.net *.facebook.com *.tatadigital.com *.tataneupolicy.com *.tataneucredit.com fpnpmcdn.net siteintercept.qualtrics.com *.qualtrics.com app.link *.omtrdc.net *.akamaihd.net *.sanity.io analytics.google.com api2.branch.io *.branch.io 684d0d43.akstat.io *.akstat.io rs.fullstory.com *.fullstory.com c.go-mpulse.net *.go-mpulse.net app.launchdarkly.com clientstream.launchdarkly.com *.launchdarkly.com *.adobedtm.com *.googletagmanager.com *.demdex.net nc2ghyne.api.sanity.io *.adobecqms.net snap.licdn.com  stats.g.doubleclick.net httpbin.org firebaseinstallations.googleapis.com *.googleadservices.com *.linkedin.com *.twimg.com tatadigitallimited.sc.omtrdc.net media.croma.com cdn.shopify.com img.tatacliq.com *.bigbasket.com *.fptls.com *.fptls3.com api.fpjs.io *.api.fpjs.io onemg.gumlet.io *.1mg.com cdn.sanity.io p.adsymptotic.com *.google.co.in googleads.g.doubleclick.net *.youtube.com sdk.rsut.io websoc.resu.io fcmregistrations.googleapis.com al.resulticks.com cdnjs.cloudflare.com www.gstatic.com wss://websoc.resu.io www.google.com *.blob.core.windows.net staticimg.titan.co.in cdn.linkedin.oribi.io *.juspay.in https://utils.follow.whistle.mobi;
-  font-src 'self';
-  frame-src 'self' *.demdex.net *.youtube.com 11688456.fls.doubleclick.net *.doubleclick.net bid.g.doubleclick.net app.link  wap-tdprp-pp-ci-cap-161.azurewebsites.net wap-tdprd-pr-ci-cap-161.azurewebsites.net tivachatbotdev.azurewebsites.net wap-tddev-de-ci-cap-161.azurewebsites.net *.capitalfloat.com www.google.com  *.juspay.in;
-  img-src 'self' *.everesttech.net *.linkedin.com *.adobecqms.net  *.tataneucredit.com *.sanity.io *.twimg.com tatadigitallimited.sc.omtrdc.net media.croma.com cdn.shopify.com img.tatacliq.com *.bigbasket.com onemg.gumlet.io *.1mg.com cdn.sanity.io *.facebook.com app.link *.adsymptotic.com *.google.co.in data: *.tajhotels.com *.seleqtionshotels.com al.resulticks.com www.google.com www.googletagmanager.com *.titan.co.in *.titaneyeplus.com googleads.g.doubleclick.net *.blob.core.windows.net cromauat-res.cloudinary.com *.tataunistore.com staticimg.titan.co.in www.tanishq.co.in; 
-  manifest-src 'self' app.link;
-  media-src 'self' *.youtube.com app.link cdn.sanity.io;
-  worker-src 'self' app.link;
-	frame-ancestors 'self' https://www.tatacliq.com https://luxury.tatacliq.com https://www.bigbasket.com https://luxpreprod1.tataunistore.com https://luxpreprod2.tataunistore.com https://preprod1.tataunistore.com https://preprod2.tataunistore.com https://hqa1.bigbasket.com https://palettepreprod2.tataunistore.com https://palettepreprod3.tataunistore.com https://beautealpha.tatacliq.com https://palette.tatacliq.com;
-`;
-
-const securityHeaders = [
-	{
-		// NO
-		key: "Strict-Transport-Security",
-		value: "max-age=63072000; includeSubDomains; preload",
-	},
-	{
-		// PARTIAL
-		key: "Content-Security-Policy",
-		value: ContentSecurityPolicy.replace(/\s{2,}/g, " ").trim(),
-	},
-	{
-		// YES
-		key: "X-Content-Type-Options",
-		value: "nosniff",
-	},
-	{
-		// NO
-		key: "cache-control",
-		value: "no-cache, no-store, max-age=0, must-revalidate",
-	},
-	{
-		// YES
-		key: "X-XSS-Protection",
-		value: "1; mode=block",
-	},
-];
-// @ts-check
-const STUDIO_REWRITE = {
-	source: "/studio/:path*",
-	destination:
-		process.env.NODE_ENV === "development"
-			? "http://localhost:3333/studio/:path*"
-			: "/studio/index.html",
-};
-
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-	enabled: process.env.ANALYZE === "true",
-});
-const withPWA = require("next-pwa")({
-	dest: "public",
-	register: true,
-	skipWaiting: true,
-	disable: false, // process.env.NODE_ENV === 'development',
-});
-
-/**
- * @type {import('next').NextConfig}
- **/
-nextConfig = {
-	basePath: "/v2",
-	swcMinify: true,
-	reactStrictMode: true,
-	rewrites: () => [STUDIO_REWRITE],
-	images: {
-		domains: [
-			"flagcdn.com",
-			"cdn.sanity.io",
-			"www.tatadigital.com",
-			"www.tataneupolicy.com",
-			"www.tataneucredit.com",
-			"media.croma.com",
-			"www.bigbasket.com",
-			"www.tajhotels.com",
-			"img.tatacliq.com",
-			"onemg.gumlet.io",
-			"res.cloudinary.com",
-			"aem-sit-r2.tatadigital.com",
-			"tatadigital-pre-prod-65b.adobecqms.net",
-			"www.seleqtionshotels.com",
-			"cdn.shopify.com",
-			"author-tatadigital-prod.adobecqms.net",
-			"cromapt-res.cloudinary.com",
-			"tatadigital-prod-cdn.adobecqms.net",
-			"www.croma.com",
-			"qa-portal.tataplay.com",
-			"www.vivantahotels.com",
-			"api.tatadigital.com",
-			"ppapi.tatadigital.com",
-			"dapi.tatadigital.com",
-			"api.tataneupolicy.com",
-			"ppapi.tataneupolicy.com",
-			"dapi.tataneupolicy.com",
-			"tatadigital.freshdesk.com",
-			"assets.adobedtm.com",
-			"www.googletagmanager.com",
-			"assets.adobedtm.com",
-			"https://preprod-pwa.croma.com",
-			"tata-digital.gitlab.io",
-			"aem-pt.tatadigital.com",
-			"*.linkedin.com",
-			"*.everesttech.net",
-			"*.adsymptotic.com",
-			"*.google.co.in",
-			"cromauat-res.cloudinary.com",
-			"*.titan.co.in",
-			"*.titaneyeplus.com",
-			"tatadigital-dev.adobecqms.net",
-			"assets.croma.com",
-			"staticimg.titan.co.in",
-			"www.tanishq.co.in",
-		],
-	},
-	transpilePackages: [
-		"../shared/package.json",
-		"../neukit/package.json",
-		"../core/package.json",
-		"../features/package.json",
-	],
-	eslint: {
-		dirs: ["pages", "features", "components", "lib", "styles"],
-	},
-
-	webpack: (config) => {
-		config.resolve.fallback = { fs: false };
-
-		return config;
-	},
-};
-if (process.env.NODE_ENV === "production") {
-	nextConfig = {
-		...nextConfig,
-		async headers() {
-			return [
-				{
-					source: "/:path*",
-					headers: securityHeaders,
-				},
-			];
-		},
-	};
-}
-
-const tempDataset = process.env.NEXT_PUBLIC_SANITY_DATASET || `development`;
-const tempEnv = tempDataset === "develop" ? `development` : tempDataset;
-require("dotenv").config({
-	path: `./environments/.env.${tempEnv}`,
-});
-let env = {};
-Object.keys(process.env).forEach((key) => {
-	env[key] = process.env[key];
-});
-const environments = {
-	env,
-};
-const plugins = [withPWA, withBundleAnalyzer];
-// eslint-disable-next-line no-unused-vars
-module.exports = (_phase, { defaultConfig }) => {
-	return plugins.reduce(
-		(acc, plugin) => {
-			if (Array.isArray(plugin)) {
-				return plugin[0](acc, plugin[1]);
-			}
-			return plugin(acc);
-		},
-		{ ...nextConfig },
-		{ ...environments },
-	);
-};
+https://web-uatv1.amastaysandtrails.com/en-in/70-vale-assagaon-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/anjanagiri-kotagiri/
+https://web-uatv1.amastaysandtrails.com/en-in/asanji-wadi-alibag/
+https://web-uatv1.amastaysandtrails.com/en-in/nine-palms-alibaug/
+https://web-uatv1.amastaysandtrails.com/en-in/pathiramanal-villa-alappuzha/
+https://web-uatv1.amastaysandtrails.com/en-in/moonstone-bhopal/
+https://web-uatv1.amastaysandtrails.com/en-in/helens-garden-house-bhopal/
+https://web-uatv1.amastaysandtrails.com/en-in/arcadia-coorg/villa-rooms-and-amenities
+https://web-uatv1.amastaysandtrails.com/en-in/pollibetta-bungalow-coorg/
+https://web-uatv1.amastaysandtrails.com/en-in/glenlorna-bungalow-coorg/
+https://web-uatv1.amastaysandtrails.com/en-in/rare-earth-estate-coorg/
+https://web-uatv1.amastaysandtrails.com/en-in/the-mango-house-alibag/
+https://web-uatv1.amastaysandtrails.com/en-in/taneerhulla-cottage-coorg/
+https://web-uatv1.amastaysandtrails.com/en-in/taneerhulla-bungalow-coorg/
+https://web-uatv1.amastaysandtrails.com/en-in/woshully-bungalow-coorg/
+https://web-uatv1.amastaysandtrails.com/en-in/bloomsville-coonoor/
+https://web-uatv1.amastaysandtrails.com/en-in/abhay-manor-udaipur/
+https://web-uatv1.amastaysandtrails.com/en-in/sneh-villa-kodaikanal/
+https://web-uatv1.amastaysandtrails.com/en-in/ramgarh-heritage-villa-manali/
+https://web-uatv1.amastaysandtrails.com/en-in/villa-no-1-saipem-hills-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/chikoo-villa-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/white-house-lonavala/
+https://web-uatv1.amastaysandtrails.com/en-in/sluice-house-lonavala/
+https://web-uatv1.amastaysandtrails.com/en-in/beach-house-madh-island/
+https://web-uatv1.amastaysandtrails.com/en-in/cardozo-house-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/mirayan-nashik/
+https://web-uatv1.amastaysandtrails.com/en-in/sevenmallay-bungalow-munnar/
+https://web-uatv1.amastaysandtrails.com/en-in/moira-by-the-church-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/palmeira-de-socorro-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/madupatty-bungalow-munnar/
+https://web-uatv1.amastaysandtrails.com/en-in/kanniamallay-bungalow-munnar/
+https://web-uatv1.amastaysandtrails.com/en-in/braganza-house-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/kadalaar-bungalow-munnar/
+https://web-uatv1.amastaysandtrails.com/en-in/25-farm-house-vedic-village-kolkata/
+https://web-uatv1.amastaysandtrails.com/en-in/puttabong-cottage-darjeeling/
+https://web-uatv1.amastaysandtrails.com/en-in/ballyhack-cottage-shimla/
+https://web-uatv1.amastaysandtrails.com/en-in/arabidacool-bungalow-chikmagalur/
+https://web-uatv1.amastaysandtrails.com/en-in/parvathy-bungalow-munnar/
+https://web-uatv1.amastaysandtrails.com/en-in/sherly-ente-kumbalanghi-kochi/
+https://web-uatv1.amastaysandtrails.com/en-in/raman-villa-shimla/
+https://web-uatv1.amastaysandtrails.com/en-in/whispering-pines-bhimtal/
+https://web-uatv1.amastaysandtrails.com/en-in/cottabetta-bungalow-coorg/
+https://web-uatv1.amastaysandtrails.com/en-in/surgi-bungalow-coorg/
+https://web-uatv1.amastaysandtrails.com/en-in/skanda-coorg/
+https://web-uatv1.amastaysandtrails.com/en-in/aquabliss-alappuzha/
+https://web-uatv1.amastaysandtrails.com/en-in/makaibari-bungalow-darjeeling/
+https://web-uatv1.amastaysandtrails.com/en-in/wayside-villa-darjeeling/
+https://web-uatv1.amastaysandtrails.com/en-in/citrus-county-hoshiarpur/
+https://web-uatv1.amastaysandtrails.com/en-in/forest-home-hosur/
+https://web-uatv1.amastaysandtrails.com/en-in/rang-mahal-jaipur/
+https://web-uatv1.amastaysandtrails.com/en-in/abhay-villa-jodhpur/
+https://web-uatv1.amastaysandtrails.com/en-in/kothi-umednagar-jodhpur/
+https://web-uatv1.amastaysandtrails.com/en-in/the-deck-junagadh/
+https://web-uatv1.amastaysandtrails.com/en-in/lattitude-by-the-lake-kamshet/
+https://web-uatv1.amastaysandtrails.com/en-in/chalet-1228-kusur-kamshet/
+https://web-uatv1.amastaysandtrails.com/en-in/lily-pad-kumarakom/
+https://web-uatv1.amastaysandtrails.com/en-in/casa-kenzo-kashid/
+https://web-uatv1.amastaysandtrails.com/en-in/skyfall-kashid/
+https://web-uatv1.amastaysandtrails.com/en-in/victory-dawn-kochi/
+https://web-uatv1.amastaysandtrails.com/en-in/villa-seven-lonavala/
+https://web-uatv1.amastaysandtrails.com/en-in/whispering-heights-lonavala/
+https://web-uatv1.amastaysandtrails.com/en-in/godhuli-bhimal-naukuchiatal/
+https://web-uatv1.amastaysandtrails.com/en-in/godhuli-surai-naukuchiatal/
+https://web-uatv1.amastaysandtrails.com/en-in/godhuli-padam-naukuchiatal/
+https://web-uatv1.amastaysandtrails.com/en-in/godhuli-timil-naukuchiatal/
+https://web-uatv1.amastaysandtrails.com/en-in/godhuli-timur-naukuchiatal/
+https://web-uatv1.amastaysandtrails.com/en-in/ambika-vilas-thiruvananthapuram/
+https://web-uatv1.amastaysandtrails.com/en-in/vintage-halton-trivandrum/
+https://web-uatv1.amastaysandtrails.com/en-in/talia-costa-udaipur/
+https://web-uatv1.amastaysandtrails.com/en-in/the-old-cattle-shed-wayanad/
+https://web-uatv1.amastaysandtrails.com/en-in/heliconia-villa-wayanad/
+https://web-uatv1.amastaysandtrails.com/en-in/hibiscus-wayanad/
+https://web-uatv1.amastaysandtrails.com/en-in/vivid-foliage-kasaragod/
+https://web-uatv1.amastaysandtrails.com/en-in/aberdeen-coonoor/
+https://web-uatv1.amastaysandtrails.com/en-in/werifesteria-coonoor/
+https://web-uatv1.amastaysandtrails.com/en-in/la-maison-fontainhas-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/villa-siolim-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/hacienda-de-bastora-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/palmeira-de-saligao-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/eden-farms-paradise-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/eden-farms-sapphire-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/eden-farms-aqua-marine-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/eden-farms-antonio-manuel-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/eden-farms-cottage-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/eden-farms-emerald-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/aguada-solitude-villa-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/aguada-serenity-villa-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/aguada-sea-villa-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/aguada-shell-villa-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/villa-eterna-goa/
+https://web-uatv1.amastaysandtrails.com/en-in/kailash-house-kodaikanal/
+https://web-uatv1.amastaysandtrails.com/en-in/kumara-villa-kodaikanal/
+https://web-uatv1.amastaysandtrails.com/en-in/ravens-nest-kotagiri/
+https://web-uatv1.amastaysandtrails.com/en-in/dingley-dell-mahabaleshwar/
+https://web-uatv1.amastaysandtrails.com/en-in/butterfly-villa-nashik/
+https://web-uatv1.amastaysandtrails.com/en-in/nettigudi-bungalow-munnar/
+https://web-uatv1.amastaysandtrails.com/en-in/sholamallay-bungalow-munnar/
+https://web-uatv1.amastaysandtrails.com/en-in/dulwich-park-view-panchgani/
+https://web-uatv1.amastaysandtrails.com/en-in/dulwich-terrace-panchgani/
+https://web-uatv1.amastaysandtrails.com/en-in/serendipity-ranikhet/
+https://web-uatv1.amastaysandtrails.com/en-in/barefoot-bungalow-dhanaulti/
+https://web-uatv1.amastaysandtrails.com/en-in/kashi-house-rishikesh/
+https://web-uatv1.amastaysandtrails.com/en-in/nilaya-amaltaas-udaipur/
+https://web-uatv1.amastaysandtrails.com/en-in/patus-haven-lonavala/
+https://web-uatv1.amastaysandtrails.com/en-in/villa-ishatva-alibaug/
+https://web-uatv1.amastaysandtrails.com/en-in/kihim-courtyard-alibaug/
+https://web-uatv1.amastaysandtrails.com/en-in/yemmigoondi-cottage-coorg/
+https://web-uatv1.amastaysandtrails.com/en-in/aqua-vista-luxuria-nashik/
+https://web-uatv1.amastaysandtrails.com/en-in/aqua-vista-watermark-nashik/
