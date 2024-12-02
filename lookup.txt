@@ -4,6 +4,13 @@ https://www.amastaysandtrails.com/en-in/chalet-1228-kusur-kamshet/offers-and-pro
 https://www.amastaysandtrails.com/en-in/citrus-county-hoshiarpur/amenities/ is invalid - Error: Client network socket disconnected before secure TLS connection was established
 https://www.amastaysandtrails.com/en-in/dingley-dell-mahableshwar/offers-and-promotions/ is invalid - Error: Client network socket disconnected before secure TLS connection was established
 
+
+https://www.amastaysandtrails.com/en-in/chalet-1228-kusur-kamshet/offers-and-promotions/ is invalid - Error: Maximum number of redirects exceeded
+https://www.amastaysandtrails.com/en-in/chalet-1228-kusur-kamshet/offers-and-promotions/ is invalid - Error: Maximum number of redirects exceeded
+https://www.amastaysandtrails.com/en-in/chalet-1228-kusur-kamshet/offers-and-promotions/ is invalid - Error: Maximum number of redirects exceeded
+https://www.amastaysandtrails.com/en-in/chalet-1228-kusur-kamshet/offers-and-promotions/
+
+
 https://www.amastaysandtrails.com/contact-us/
 https://www.amastaysandtrails.com/en-in//accommodations/
 https://www.amastaysandtrails.com/en-in//ente_kumbalanghi_kochi/
